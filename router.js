@@ -16,9 +16,8 @@ module.exports = function(app) {
 		var query = {};
 		if( tag !== '全部' && !search ) query.type = tag;
 		if( search ) {
-			var reg = new RegExp(search, 'ig');
+			var reg = new RegExp(search, 'gi');
 			query.title = reg;
-			query.alias = reg;
 		}
 		Movie.find( query )
 		.sort({ _id: 1 })
