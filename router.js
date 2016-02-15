@@ -16,7 +16,7 @@ module.exports = function(app) {
 		var query = {};
 		if( tag !== '全部' && !search ) query.type = tag;
 		if( search ) {
-			var reg = new RegExp(search, 'g');
+			var reg = new RegExp(search, 'ig');
 			query.title = reg;
 			query.alias = reg;
 		}

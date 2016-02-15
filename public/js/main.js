@@ -146,6 +146,11 @@ function randerList( $wrap, tag, start, length, search, clear ) {
 	var $dom = $('<div>');
 	var url = '/movie/list?tag='+tag+'&start='+start+'&length='+length+'&search='+search;
 	AjaxGet(url, function(data) {
+		if( clear ) {
+			COUNT = 0;
+			$wrap.html('');
+			$(window).scrollTop(0);
+		}
 		if( !data.length ) return alert('没有更多数据了\n( >﹏<。)～');
 		$.each(data, function(i, el) {
 			var $div = $('<div class="item">');
@@ -154,11 +159,6 @@ function randerList( $wrap, tag, start, length, search, clear ) {
 			$div.html( html );
 			$dom.append($div);
 		});
-		if( clear ) {
-			COUNT = 0;
-			$wrap.html('');
-			$(window).scrollTop(0);
-		}
 		$wrap.append( $dom.children() );
 	});
 }
