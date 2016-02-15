@@ -1,0 +1,27 @@
+{
+  "name": "douban_movie",
+  "version": "1.0.0",
+  "description": "\"豆瓣电影爬虫\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "null"
+  },
+  "keywords": [
+    "豆瓣",
+    "电影",
+    "爬虫",
+    "node",
+    "javascript"
+  ],
+  "author": "yangsenchn@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cheerio": "^0.20.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.3",
+    "pinyin": "^2.7.0",
+    "redis": "^2.4.2",
+    "request": "^2.69.0"
+  }
+}
