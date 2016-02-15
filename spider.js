@@ -12,7 +12,7 @@ var nowTip = {};
 
 var URI = 'http://movie.douban.com/j/search_subjects?type=movie&sort=recommend&page_limit=2000&page_start=0&tag=';
 var URI2 = 'http://movie.douban.com/j/subject_abstract?subject_id=';
-var TAGS = ['爱情',	'喜剧',	'动画',	'剧情', '科幻',	'动作',	'经典',	'悬疑', '青春',	'犯罪',	'惊悚',	'文艺', '纪录片',	'搞笑',	'励志',	'恐怖', '战争',	'短片',	'魔幻',	'黑色幽默', '传记',	'情色',	'动画短片',	'感人', '暴力',	'音乐',	'家庭',	'童年', '黑帮',	'浪漫',	'女性',	'同志', '史诗',	'童话',	'烂片',	'cult'];
+var TAGS = ['爱情', '喜剧', '动画', '剧情', '科幻', '动作', '经典', '悬疑', '青春', '犯罪', '惊悚', '文艺', '纪录片',	'搞笑',	'励志',	'恐怖', '战争',	'短片',	'魔幻',	'黑色幽默', '传记',	'情色',	'动画短片',	'感人', '暴力',	'音乐',	'家庭',	'童年', '黑帮',	'浪漫',	'女性',	'同志', '史诗',	'童话',	'烂片',	'cult'];
 var LEN = TAGS.length;
 var COUNT = 0;
 var SAVEDATA = {};
@@ -60,7 +60,7 @@ function download_list() {
 			request(URI+encodeURIComponent(TAGS[index]), {timeout: 30000}, function(err, res, body) {
 			    if( err ) {
 			    	errCount++;
-			    	return console.log( err + ' and index is:' + index );
+			    	return console.log( err + ' and index is:' + index + ' : ' + TAGS[index] );
 			    }
 			    if( res.statusCode !== 200 ) {
 			    	errCount++;
@@ -90,7 +90,7 @@ function download_list() {
 			    			if( count + errCount == LEN ) {
 			    				Redis.set('is_have_list', 1);
 			    				console.log('movie list is ok.');
-			    				pop_data_spider();
+			    				// pop_data_spider();
 			    			}
 			    		}
 			    	});
@@ -182,8 +182,14 @@ function get_detail_data() {
 // capture('http://movie.douban.com/subject/26277313/');
 function capture(url) {
 	var ls = exec('casperjs casper.js '+url, function(err, stdout, stderr) {
-		if( err ) return console.log( 'exec Error:\n'+err );
-		if( stderr ) return console.log( stderr );
+		if( err ) {
+			console.log( 'exec Error:\n'+err );
+			return pop_data_spider();
+		}
+		if( stderr ) {
+			console.log( stderr );
+			return pop_data_spider();
+		}
 		parse_dom( stdout );
 	});
 
@@ -231,7 +237,7 @@ function parse_dom(html) {
 		var $imdb_dom = $spans.filter('.pl').last().next('a');
 		SAVEDATA.imdb.name = $imdb_dom.html() || '';
 		SAVEDATA.imdb.url = $imdb_dom.attr('href') || '';
-		SAVEDATA.summer = $summer.find('span').eq(0).html();
+		SAVEDATA.summary = $summer.find('span').eq(0).html();
 		SAVEDATA.score_number = $sum.find('div.rating_right a span').text();
 	} catch(err) {
 		console.log( err );

@@ -20,6 +20,10 @@
 	</div>
 	
 	<ul id="tag_list"></ul>
+	<div id="detail_wrap">
+		<div id="close_detail">x</div>
+		<div id="movie_detail"></div>
+	</div>
 
 	<div id="loading">
 		<div class="spinner">
@@ -30,8 +34,54 @@
 			<div class="rect5"></div>
 		</div>
 	</div>
+	<!-- detail template -->
+	<script type="text/html" id="tpl">
+		<h2>{{ title }}({{ year }})</h2>
+		<p>
+			<span>导演: </span>
+			{{ each director as el i }}
+				{{ if i }}/{{ /if }}
+				<span><a href="http://movie.douban.com{{ el.url }}" target="_blank">{{ el.name }}</a></span>
+			{{ /each }}
+		</p>
+		<p>
+			<span>编剧: </span>
+			{{ each scenarist as el i }}
+				{{ if i }}/{{ /if }}
+				<span><a href="http://movie.douban.com{{ el.url }}" target="_blank">{{ el.name }}</a></span>
+			{{ /each }}
+		</p>
+		<p>
+			<span>演员: </span>
+			{{ each actor as el i }}
+				{{ if el.name.indexOf('更多') == -1 }}
+					{{ if i }}/{{ /if }}
+					<span><a href="http://movie.douban.com{{ el.url }}" target="_blank">{{ el.name }}</a></span>
+				{{ /if }}
+			{{ /each }}
+		</p>
+		<p><span>类型: {{ type.join(' / ') }}</span></p>
+		<p><span>地区: {{ area }}</span></p>
+		<p><span>语言: {{ language }}</span></p>
+		<p><span>年代: {{ year }}</span></p>
+		<p><span>片长: {{ time }}</span></p>
+		<p><span>别名: {{ alias }}</span></p>
+		{{ if /^[a-zA-Z0-9]+$/.test(imdb.name) }}
+			<p>
+				<span>IMDB链接: </span>
+				<span><a href="{{ imdb.url }}" target="_blank">{{ imdb.name }}</a></span>
+			</p>
+		{{ /if }}
+		<p><span>评分: {{ score }}</span></p>
+		<p><span>评分人数: {{ score_number }}</span></p>
+		<p>
+			<span>内容简介: </span>
+			<span class="summary">{{ #summary }}</span>
+		</p>
+	</script>
 
 	<script src="http://cdnjscn.b0.upaiyun.com/libs/jquery/1.11.0-rc1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/template.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

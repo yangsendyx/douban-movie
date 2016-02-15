@@ -44,6 +44,9 @@ var SEARCH = '';
 	var $list_wrap = $('#list_wrap');
 	var $tag_list = $('#tag_list');
 	var $tag_btn = $('#tag_filter');
+	var $detail_wrap = $('#detail_wrap');
+	var $detail = $detail_wrap.find('#movie_detail');
+	var $close = $detail_wrap.find('#close_detail');
 	var tag_list_t;
 
 	AjaxGet('/movie/tags', function(data) {
@@ -115,9 +118,16 @@ var SEARCH = '';
 		randerList( $list_wrap, TAG, 0, LEN, SEARCH, true );
 	});
 
+	$close.click(function() {
+		$detail_wrap.addClass('close_detail').removeClass('open_detail');
+	});
+
 	$list_wrap.delegate('.item', 'click', function() {
 		var data = $(this).data('data');
-		console.log(data);
+		data.time = data.long;
+		var html = template('tpl', data);
+		$detail.html( html );
+		$detail_wrap.addClass('open_detail').removeClass('close_detail');
 	});
 })();
 

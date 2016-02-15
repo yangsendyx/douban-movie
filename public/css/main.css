@@ -199,7 +199,15 @@ body {
 	}
 	#list_wrap div.item img {
 	 	width: 100%;
-		height: 80%;
+		height: 70%;
+	}
+	#detail_wrap {
+		width: 90%;
+		left: 5%;
+	}
+	#close_detail{
+		font-size: 60px;
+		line-height: 50px;
 	}
 }
 @media (min-width: 960px) {
@@ -209,7 +217,15 @@ body {
 	}
 	#list_wrap div.item img {
 	 	width: 100%;
-		height: 86%;
+		height: 85%;
+	}
+	#detail_wrap {
+		width: 70%;
+		left: 15%
+	}
+	#close_detail{
+		font-size: 100px;
+		line-height: 80px;
 	}
 }
 #list_wrap div.item{
@@ -248,4 +264,98 @@ body {
 
 .score {
 	color: #fe8f36;
+}
+
+@-webkit-keyframes open_model {
+	0% { 
+		display: block;
+		-webkit-transform: scaleY(0);
+	} 
+	100% {
+		display: block;
+		-webkit-transform: scaleY(1)
+	}
+} 
+@keyframes open_model {
+	0% { 
+		display: block;
+		transform: scaleY(0);
+	} 
+	100% {
+		display: block;
+		transform: scaleY(1)
+	}
+}
+
+@-webkit-keyframes close_model {
+	0% {
+		display: block;
+		-webkit-transform: scaleY(1)
+	} 
+	100% {
+		display: none;
+		-webkit-transform: scaleY(0);
+	}
+} 
+@keyframes close_model {
+	0% {
+		display: block;
+		transform: scaleY(1)
+	} 
+	100% {
+		display: none;
+		transform: scaleY(0);
+	}
+}
+
+.open_detail {
+	-webkit-animation: open_model .2s ease-in-out both;
+	animation: open_model .2s ease-in-out both;
+}
+.close_detail {
+	-webkit-animation: close_model .2s ease-in-out both;
+	animation: close_model .2s ease-in-out both;
+}
+
+#detail_wrap {
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	position: fixed;
+	height: 90%;
+	top: 5%;
+	z-index: 3;
+	background-color: rgba(255, 255, 255, .92);
+	box-shadow: 0 4px 20px 0 #333;
+	/*display: none;*/
+	transform: scaleY(0);
+	-o-transform: scaleY(0);
+	-moz-transform: scaleY(0);
+	-webkit-transform: scaleY(0);
+}
+
+#close_detail {
+	font-family: '微软雅黑';
+	color: red;
+	float: right;
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+#movie_detail {
+	clear: both;
+	padding: 10px 15px 20px;
+}
+
+#movie_detail h2 {
+	text-align: center;
+}
+
+#movie_detail p {
+	clear: both;
+	line-height: 30px;
+	margin: 0 5px;
+}
+
+#movie_detail a {
+	color: #69a;
 }
