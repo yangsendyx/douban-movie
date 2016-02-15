@@ -127,7 +127,11 @@ var SEARCH = '';
 		data.time = data.long;
 		var html = template('tpl', data);
 		$detail.html( html );
+		$detail_wrap.children().hide();
 		$detail_wrap.addClass('open_detail').removeClass('close_detail');
+		setTimeout(function() {
+			$detail_wrap.children().show();
+		}, 200);
 	});
 })();
 
