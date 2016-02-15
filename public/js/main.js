@@ -115,6 +115,7 @@ var SEARCH = '';
 			'-webkit-transform': 'translateY(-'+tag_list_t+'px)',
 			'-o-transform': 'translateY(-'+tag_list_t+'px)'
 		});
+		$search.val('');
 		randerList( $list_wrap, TAG, 0, LEN, SEARCH, true );
 	});
 

@@ -237,7 +237,7 @@ function parse_dom(html) {
 		var $imdb_dom = $spans.filter('.pl').last().next('a');
 		SAVEDATA.imdb.name = $imdb_dom.html() || '';
 		SAVEDATA.imdb.url = $imdb_dom.attr('href') || '';
-		SAVEDATA.summary = $summer.find('span').eq(0).html();
+		SAVEDATA.summary = $summer.find('span.all.hidden').html() || $summer.find('span[property="v:summary"]').html();
 		SAVEDATA.score_number = $sum.find('div.rating_right a span').text();
 	} catch(err) {
 		console.log( err );
