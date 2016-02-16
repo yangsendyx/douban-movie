@@ -126,7 +126,6 @@ var SEARCH = '';
 	$list_wrap.delegate('.item', 'click', function() {
 		var data = $(this).data('data');
 		data.time = data.long;
-		data.summary = data.summary.replace('(展开全部)', '');
 		var html = template('tpl', data);
 		$detail.html( html );
 		$detail_wrap.children().hide();
