@@ -184,10 +184,12 @@ function capture(url) {
 	var ls = exec('casperjs casper.js '+url, function(err, stdout, stderr) {
 		if( err ) {
 			console.log( 'exec Error:\n'+err );
+			pop_redis_data(nowTip.key);
 			return pop_data_spider();
 		}
 		if( stderr ) {
 			console.log( stderr );
+			pop_redis_data(nowTip.key);
 			return pop_data_spider();
 		}
 		parse_dom( stdout );
