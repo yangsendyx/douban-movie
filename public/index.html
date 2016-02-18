@@ -81,10 +81,12 @@
 			<span><a href="http://www.piaohua.com/" target="_blank">去飘花电影网</a></span> / 
 			<span><a href="https://www.baidu.com/s?wd={{title}}&rsv_spt=1&rsv_iqid=0xc4b7f9040005b757&issp=1&f=8&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=3&rsv_sug1=2&rsv_n=2" target="_blank">百度搜索该电影</a></span>
 		</p>
-		<p>
-			<span>内容简介: </span>
-			<span class="summary">{{ #summary }}</span>
-		</p>
+		{{ if summary }}
+			<p>
+				<span>内容简介: </span>
+				<span class="summary">{{ #summary }}</span>
+			</p>
+		{{ /if }}
 	</script>
 
 	<script src="http://cdnjscn.b0.upaiyun.com/libs/jquery/1.11.0-rc1/jquery.min.js"></script>
